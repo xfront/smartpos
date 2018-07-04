@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-xpos" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>cordova-plugin-xpos</name>
+    <js-module name="xpos" src="www/xpos.js">
+        <clobbers target="cordova.plugins.xpos"/>
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="cordova-plugin-xpos">
+                <param name="android-package" value="com.plutuspay.smartpos"/>
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml"/>
+        <source-file src="src/android/XPos.java" target-dir="src/com/plutuspay/smartpos"/>
+    </platform>
+</plugin>
