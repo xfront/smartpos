@@ -73,7 +73,6 @@
     <plugin name="cordova-plugin-zip" spec="^3.1.0" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
-    <plugin name="cordova-sqlcipher-adapter" spec="^0.1.12-rc2" />
     <plugin name="cordova-plugin-app-launcher" spec="^0.4.0" />
     <plugin name="cordova-plugin-qrscanner" spec="^2.6.0" />
     <plugin name="cordova-plugin-xpos" spec="cordova-plugin-xpos" />

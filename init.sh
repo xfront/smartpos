@@ -13,3 +13,5 @@ cordova plugin add cordova-plugin-qrscanner
 
 yarn run cordova-build   # make sure you can build your project
 cordova prepare
+
+cordova build android --release -- --gradleArg=-PcdvBuildMultipleApks=true

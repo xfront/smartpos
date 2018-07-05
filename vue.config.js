@@ -7,7 +7,7 @@ module.exports = {
     lintOnSave: true,
    
     // 生产环境是否生成 sourceMap 文件
-    productionSourceMap: true,
+    productionSourceMap: false,
    
     // use thread-loader for babel & TS in production build
     // enabled by default if the machine has more than 1 cores
