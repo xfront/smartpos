@@ -1,5 +1,5 @@
 {
-  "name": "xpos",
+  "name": "smartpos",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -27,7 +27,17 @@
     "vue-property-decorator": "^6.0.0",
     "vue-router": "^3.0.1",
     "vuetify": "^1.0.14",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "cordova-plugin-code-push": "^1.11.11",
+    "cordova-plugin-file": "^4.3.3",
+    "cordova-plugin-file-transfer": "^1.6.3",
+    "cordova-plugin-zip": "^3.1.0",
+    "cordova-plugin-advanced-http": "^1.11.1",
+    "cordova-plugin-geolocation": "^4.0.1",
+    "cordova-sqlcipher-adapter": "^0.1.12-rc2",
+    "cordova-plugin-app-launcher": "^0.4.0",
+    "cordova-plugin-qrscanner": "^2.6.0",
+    "cordova-plugin-xpos": "cordova-plugin-xpos"
   },
   "devDependencies": {
     "@types/chai": "^4.1.0",
@@ -55,11 +65,21 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-statusbar": {},
-      "cordova-plugin-whitelist": {}
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-code-push": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-file-transfer": {},
+      "cordova-plugin-zip": {},
+      "cordova-plugin-advanced-http": {},
+      "cordova-plugin-geolocation": {},
+      "cordova-sqlcipher-adapter": {},
+      "cordova-plugin-app-launcher": {},
+      "cordova-plugin-qrscanner": {},
+      "cordova-plugin-xpos": {}
     },
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }
