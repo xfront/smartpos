@@ -17,6 +17,8 @@
     <allow-intent href="geo:*" />
     <allow-navigation href="*" />
     <platform name="android">
+        <preference name="CodePushDeploymentKey" value="kHbGB5OHH423UGbmwrAIuqwLwViM9ae507f7-9f5b-4c28-a3b7-042ee3716e8d" />
+        <preference name="CodePushServerUrl" value="http://api.code-push.com/" />
         <allow-intent href="market:*" />
         <splash density="land-hdpi" src="res/screen/android/land-hdpi.png" />
         <splash density="land-xhdpi" src="res/screen/android/land-xhdpi.png" />

@@ -12,9 +12,21 @@ import vuetify from 'vuetify';
 
 Vue.config.productionTip = false;
 
-Vue.use(vuetify);
+Vue.use(vuetify, {
+    theme: {
+        primary: "#f44336",
+        secondary: "#e57373",
+        accent: "#9c27b0",
+        error: "#f44336",
+        warning: "#ffeb3b",
+        info: "#2196f3",
+        success: "#4caf50"
+    }
+
+});
 
 cordovaLoader(() => {
+  console.log("cordova is ready!")
   new Vue({
     router,
     store,
