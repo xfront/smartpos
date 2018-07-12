@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.plutuspay.smartpos" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>SmartPos</name>
+    <name>HelloCordova</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
@@ -17,8 +17,6 @@
     <allow-intent href="geo:*" />
     <allow-navigation href="*" />
     <platform name="android">
-        <preference name="CodePushDeploymentKey" value="kHbGB5OHH423UGbmwrAIuqwLwViM9ae507f7-9f5b-4c28-a3b7-042ee3716e8d" />
-        <preference name="CodePushServerUrl" value="http://api.code-push.com/" />
         <allow-intent href="market:*" />
         <splash density="land-hdpi" src="res/screen/android/land-hdpi.png" />
         <splash density="land-xhdpi" src="res/screen/android/land-xhdpi.png" />
@@ -69,15 +67,9 @@
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
-    <plugin name="cordova-plugin-code-push" spec="^1.11.11" />
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
     <plugin name="cordova-plugin-zip" spec="^3.1.0" />
-    <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />
-    <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
-    <plugin name="cordova-plugin-app-launcher" spec="^0.4.0" />
-    <plugin name="cordova-plugin-qrscanner" spec="^2.6.0" />
-    <plugin name="cordova-plugin-xpos" spec="cordova-plugin-xpos" />
-    <engine name="browser" spec="^5.0.3" />
     <engine name="android" spec="^7.1.0" />
+    <engine name="browser" spec="^5.0.3" />
 </widget>

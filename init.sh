@@ -1,7 +1,8 @@
 #!/bin/sh
 
-vue create smartpos   # create your vue project. install @vue/cli if you haven't.
+cordova create smartpos com.plutuspay.smartpos SmartPos
 cd smartpos
+cordova platform add android
 vue add cordova         # add vue-cli-plugin-cordova and invoke it
 
 cordova plugin add cordova-plugin-code-push

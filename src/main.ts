@@ -1,35 +1,33 @@
-import 'typeface-roboto';
-import 'material-design-icons/iconfont/material-icons.css';
-import 'vuetify/dist/vuetify.css';
-import 'babel-polyfill';
+
+import cordovaLoader from "./cordovaLoader";
+// Import Vue
 import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
-import './registerServiceWorker';
-import cordovaLoader from './cordovaLoader';
-import vuetify from 'vuetify';
 
-Vue.config.productionTip = false;
+// Import F7
+import Framework7 from 'framework7/framework7.esm.bundle.js';
 
-Vue.use(vuetify, {
-    theme: {
-        primary: "#f44336",
-        secondary: "#e57373",
-        accent: "#9c27b0",
-        error: "#f44336",
-        warning: "#ffeb3b",
-        info: "#2196f3",
-        success: "#4caf50"
-    }
+// Import F7 Vue Plugin
+import Framework7Vue from 'framework7-vue/framework7-vue.esm.bundle.js';
 
-});
+// Init F7-Vue Plugin
 
-cordovaLoader(() => {
-  console.log("cordova is ready!")
-  new Vue({
-    router,
-    store,
-    render: (h) => h(App),
-  }).$mount('#app');
+// Import F7 Styles
+import  'framework7/css/framework7.css';
+
+// Import Icons and App Custom Styles
+import   './css/icons.css';
+import   './css/app.css';
+
+// Import App Component
+import App from './app.vue';
+// Init F7 Vue Plugin
+Framework7.use( Framework7Vue)
+Vue.config.productionTip = true;
+
+cordovaLoader(()=>{
+// Init App
+    console.log("cordova is ready!")
+    new Vue({
+        render: (h) => h(App),
+    }).$mount('#app');
 });

@@ -1,7 +1,10 @@
 {
-  "name": "smartpos",
-  "version": "0.1.0",
-  "private": true,
+  "name": "com.plutuspay.smartpos",
+  "version": "1.0.0",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "displayName": "SmartPos",
+  "author": "itfront",
+  "license": "Apache-2.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build  --dest www",
@@ -17,6 +20,7 @@
     "cordova-plugin-advanced-http": "^1.11.1",
     "cordova-plugin-app-launcher": "^0.4.0",
     "cordova-plugin-code-push": "^1.11.11",
+    "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-file": "^4.3.3",
     "cordova-plugin-file-transfer": "^1.6.3",
@@ -29,14 +33,17 @@
     "cordova-plugin-xpos": "file:cordova-plugin-xpos",
     "cordova-plugin-zip": "^3.1.0",
     "material-design-icons": "^3.0.1",
-    "register-service-worker": "^1.0.0",
     "typeface-roboto": "0.0.54",
+    "framework7": "^3.0.0",
+    "framework7-icons": "^0.9.1",
+    "framework7-vue": "^3.0.0",
+    "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.0.0",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.0.14",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuetify": "^1.0.14"
   },
   "devDependencies": {
     "@types/chai": "^4.1.0",
@@ -53,11 +60,6 @@
     "vue-cli-plugin-cordova": "^1.0.0-beta.7",
     "vue-template-compiler": "^2.5.16"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
   "cordova": {
     "plugins": {
       "cordova-plugin-device": {},
@@ -72,12 +74,16 @@
       "cordova-plugin-advanced-http": {},
       "cordova-plugin-geolocation": {},
       "cordova-plugin-app-launcher": {},
-      "cordova-plugin-qrscanner": {},
-      "cordova-plugin-xpos": {}
+      "cordova-plugin-qrscanner": {}
     },
     "platforms": [
-      "browser",
-      "android"
+      "android",
+      "browser"
     ]
-  }
+  },
+  "browserslist": [
+    "> 20%",
+    "since 2015",
+    "not ie <= 8"
+  ]
 }

@@ -1,6 +1,6 @@
 module.exports = {
     // 基本路径
-    baseUrl: 'pos',
+    baseUrl: '/',
     // 输出文件目录
     outputDir: 'www',
     // eslint-loader 是否在保存的时候检查
@@ -8,6 +8,8 @@ module.exports = {
    
     // 生产环境是否生成 sourceMap 文件
     productionSourceMap: false,
+    runtimeCompiler: false,
+    transpileDependencies: ['framework7', 'framework7-vue'],
    
     // use thread-loader for babel & TS in production build
     // enabled by default if the machine has more than 1 cores
