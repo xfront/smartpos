@@ -1,149 +1,333 @@
 <template>
-    <f7-page class="display-flex">
-        <f7-navbar>
-            <f7-nav-left>
-                <f7-link icon-if-ios="f7:menu" icon-if-md="material:menu" panel-open="left"></f7-link>
-            </f7-nav-left>
-            <f7-nav-title>My App</f7-nav-title>
-            <f7-nav-right>
-                <f7-link icon-if-ios="f7:menu" icon-if-md="material:menu" panel-open="right"></f7-link>
-            </f7-nav-right>
-        </f7-navbar>
-        <f7-toolbar>
-            <f7-link>Left Link</f7-link>
-            <f7-link>Right Link</f7-link>
-        </f7-toolbar>
-        <f7-block strong>
-            <p>Here is your blank Framework7 app. Let's see what we have here.</p>
-        </f7-block>
-
-        <f7-swiper class="align-self-center flex-shrink-1" pagination
-                   :params="{loop:true, speed:800, spaceBetween: 20}">
-            <f7-swiper-slide>
-                <f7-block-title>Navigation</f7-block-title>
-                <f7-list>
-                    <f7-list-item link="/about/" title="About"></f7-list-item>
-                    <f7-list-item link="/form/" title="Form"></f7-list-item>
-                </f7-list>
-            </f7-swiper-slide>
-            <f7-swiper-slide>
-                <f7-block-title>Modals</f7-block-title>
-                <f7-block strong>
-                    <f7-row>
-                        <f7-col width="50">
-                            <f7-button fill raised popup-open="#popup">Popup</f7-button>
-                        </f7-col>
-                        <f7-col width="50">
-                            <f7-button fill raised login-screen-open="#login-screen">Login Screen</f7-button>
-                        </f7-col>
-                    </f7-row>
-                </f7-block>
-            </f7-swiper-slide>
-            <f7-swiper-slide>
-                <f7-block-title>Panels</f7-block-title>
-                <f7-block strong>
-                    <f7-row>
-                        <f7-col width="50">
-                            <f7-button fill raised panel-open="left">Left Panel</f7-button>
-                        </f7-col>
-                        <f7-col width="50">
-                            <f7-button fill raised panel-open="right">Right Panel</f7-button>
-                        </f7-col>
-                    </f7-row>
-                </f7-block>
-            </f7-swiper-slide>
-            <f7-swiper-slide>
-
-                <f7-list>
-                    <f7-list-item link="/dynamic-route/blog/45/post/125/?foo=bar#about"
-                                  title="Dynamic Route"></f7-list-item>
-                    <f7-list-item link="/load-something-that-doesnt-exist/" title="Default Route (404)"></f7-list-item>
-                </f7-list>
-            </f7-swiper-slide>
-            <f7-swiper-slide>
-                <f7-block-title>No gap between columns</f7-block-title>
-                <f7-block>
-                    <f7-row no-gap>
-                        <f7-col>50% (.col)</f7-col>
-                        <f7-col>50% (.col)</f7-col>
-                    </f7-row>
-                    <f7-row no-gap>
-                        <f7-col>25% (.col)</f7-col>
-                        <f7-col>25% (.col)</f7-col>
-                        <f7-col>25% (.col)</f7-col>
-                        <f7-col>25% (.col)</f7-col>
-                    </f7-row>
-                    <f7-row no-gap>
-                        <f7-col width="33">33% (.col-33)</f7-col>
-                        <f7-col width="66">66% (.col-66)</f7-col>
-                    </f7-row>
-                    <f7-row no-gap>
-                        <f7-col width="25">25% (.col-25)</f7-col>
-                        <f7-col width="25">25% (.col-25)</f7-col>
-                        <f7-col width="50">50% (.col-50)</f7-col>
-                    </f7-row>
-                </f7-block>
-            </f7-swiper-slide>
-        </f7-swiper>
-
+    <f7-page>
         <!-- FAB Right Bottom (Orange) -->
         <f7-fab position="right-bottom" slot="fixed" color="orange">
             <f7-icon ios="f7:add" md="material:add"></f7-icon>
             <f7-icon ios="f7:close" md="material:close"></f7-icon>
             <f7-fab-buttons position="top">
-                <f7-fab-button label="Action 1" @click="sayHi"> 1</f7-fab-button>
+                <f7-fab-button label="Action 1" @click="fetchDesktop()"> 1</f7-fab-button>
                 <f7-fab-button label="Action 2">2</f7-fab-button>
             </f7-fab-buttons>
         </f7-fab>
+
+        <div class="wrapper">
+            <p class="main-title">商户名：ABC</p>
+            <swipe-grid class="top-grid" :itemList="appList.top" :row="1" :column="1" :itemStyles="topStyles"
+                        :clickfunc="onClickItem"/>
+            <swipe-grid class="body-grid" :itemList="appList.body" :row="2" :column="2" :itemStyles="bodyStyles"
+                        :clickfunc="onClickItem"/>
+            <swipe-grid class="bottom-grid" :itemList="appList.bottom" :row="1" :column="3" :itemStyles="bottomStyles"
+                        :clickfunc="onClickItem"/>
+        </div>
     </f7-page>
 </template>
-<script>
-    export default {
-        methods: {
-            sayHi: function (e) {
-                this.$f7.dialog.alert('hi');
-            }
-            , obj2String: function (obj, L, M) {
-                let level = !!L ? L: 0;
-                let maxlevel = !!M ? M: 3;
-                if (level >= maxlevel)
-                    return "";
-                //create an array that will later be joined into a string.
-                let buf = [];
 
-                //is object
-                //    Both arrays and objects seem to return "object"
-                //    when typeof(obj) is applied to them. So instead
-                //    I am checking to see if they have the property
-                //    join, which normal objects don't have but
-                //    arrays do.
-                if (typeof(obj) == "object" && (obj.join == undefined)) {
-                    buf.push("{");
-                    for (let prop in obj) {
-                        let val = obj[prop];
-                        let s = (val !== null && val !== undefined) ? this.obj2String(val, level++, maxlevel) : "null";
-                        buf.push(prop, ": ", s, ",");
+<style scoped>
+    .wrapper {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: stretch;
+        align-items: stretch;
+        align-content: stretch;
+        height: 100%;
+        width: 100%;
+        margin: auto;
+    }
+
+    .wrapper > * {
+        padding: 0px;
+        flex: 1 100%;
+    }
+
+    .main-title {
+        flex: 1 2 auto;
+        text-align: center;
+        font-weight: bold;
+        margin: 0px;
+    }
+
+    .top-grid {
+        width: 100%;
+        flex: 3 2 auto; /* default 0 */
+    }
+
+    .body-grid {
+        width: 100%;
+        max-height: 80%;
+        flex: 10 3 auto; /* default 0 */
+    }
+
+    .bottom-grid {
+        width: 100%;
+        flex: 2 2 auto; /* default 0 */
+    }
+</style>
+
+<script>
+    import SwipeGrid from '@/components/SwipeGrid.vue'; // @ is an alias to /src
+    const CASHIER_HOST = "https://120.78.29.7:16803/PosCashier/";
+    const APP_HOST = "https://app.plutuspay.com/";
+
+    export default {
+        data: function () {
+            return {
+                topStyles: [
+                    {
+                        backgroundImage: "linear-gradient(to top, #ff6201, #ff6201)",
+                        borderRadius: "8px",
+                        fontSize: "40px",
+                        color: "white",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        alignContent: "center",
+                        margin: "3px"
+                    },
+                    {
+                        backgroundImage: "linear-gradient(to top, #ff6201, #ff6201)",
+                        borderRadius: "8px",
+                        fontSize: "40px",
+                        color: "blue",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "stretch",
+                        margin: "3px"
                     }
-                    buf.push("}");
-                    //is array
-                } else if (typeof(obj) == "object" && !(obj.join == undefined)) {
-                    buf.push("[")
-                    for (let prop in obj) {
-                        let val = obj[prop];
-                        let s = (val !== null && val !== undefined) ? this.obj2String(val, level++, maxlevel) : "null";
-                        buf.push(s, ",");
+                ],
+                bodyStyles: [
+                    {
+                        backgroundImage: "linear-gradient(to top, #01a480, #01a480)",
+                        borderRadius: "8px",
+                        fontSize: "25px",
+                        color: "white",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        margin: "3px"
+                    },
+                    {
+                        backgroundImage: "linear-gradient(to top, #ffa001, #ffa001)",
+                        borderRadius: "8px",
+                        fontSize: "25px",
+                        color: "white",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        margin: "3px"
+                    },
+                    {
+                        backgroundImage: "linear-gradient(to top, #fd4033, #fd4033)",
+                        borderRadius: "8px",
+                        fontSize: "25px",
+                        color: "white",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                        margin: "3px"
+                    },
+                    {
+                        backgroundImage: "linear-gradient(to top, #5ca94a, #5ca94a)",
+                        borderRadius: "8px",
+                        fontSize: "25px",
+                        color: "white",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        margin: "3px"
                     }
-                    buf.push("]")
-                    //is function
-                } else if (typeof(obj) == "function") {
-                    buf.push("function ", obj.name, "(){}")
-                    //all other values can be done with JSON.stringify
-                } else {
-                    buf.push(obj.toString())
-                }
-                return buf.join("")
+                ],
+                bottomStyles: [
+                    {
+                        backgroundImage: "linear-gradient(to top, #ff6201, #ff6201)",
+                        borderRadius: "8px",
+                        fontSize: "20px",
+                        color: "white",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        margin: "3px"
+                    },
+                    {
+                        backgroundImage: "linear-gradient(to top, #01a480, #01a480)",
+                        borderRadius: "8px",
+                        fontSize: "20px",
+                        color: "white",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        margin: "3px"
+                    },
+                    {
+                        backgroundImage: "linear-gradient(to top, #ffa001, #ffa001)",
+                        borderRadius: "8px",
+                        fontSize: "20px",
+                        color: "white",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        margin: "3px"
+                    }
+                ],
+                posInfo: {merchantName: ""},
+                defaultList: []
             }
         },
+
+        components: {
+            SwipeGrid,
+        },
+        computed: {
+            appList: function () {
+                return this.transList(this.defaultList);
+            }
+        },
+        created: function () {
+            setTimeout(() => {
+                this.defaultList = [{
+                    "AppID": 3,
+                    "IsNative": true,
+                    "Label": "收银",
+                    "WebUrl": null,
+                    "IconPath": "icon/1495524990579_135_135_.png",
+                    "PkgName": "com.plutuspay.poscashier",
+                    "DisplayIndex": 1,
+                    "LevelIndex": -1
+                }, {
+                    "AppID": 8,
+                    "IsNative": false,
+                    "Label": "设置",
+                    "WebUrl": "conf.js",
+                    "IconPath": "icon/1495525016330_84_84_.png",
+                    "PkgName": null,
+                    "DisplayIndex": 4,
+                    "LevelIndex": 2
+                }, {
+                    "AppID": 13,
+                    "IsNative": false,
+                    "Label": "发券",
+                    "WebUrl": "javascript:alert(\"H5应用开发中...\")",
+                    "IconPath": "icon/1495525040581_116_91_.png",
+                    "PkgName": null,
+                    "DisplayIndex": 5,
+                    "LevelIndex": 1
+                }, {
+                    "AppID": 14,
+                    "IsNative": false,
+                    "Label": "验券",
+                    "WebUrl": "javascript:alert(\"H5应用开发中...\")",
+                    "IconPath": "icon/1495525047800_116_116_.png",
+                    "PkgName": null,
+                    "DisplayIndex": 6,
+                    "LevelIndex": 1
+                }, {
+                    "AppID": 14,
+                    "IsNative": false,
+                    "Label": "验券",
+                    "WebUrl": "javascript:alert(\"H5应用开发中...\")",
+                    "IconPath": "icon/1495525047800_116_116_.png",
+                    "PkgName": null,
+                    "DisplayIndex": 6,
+                    "LevelIndex": 1
+                }];
+            }, 3000);
+            //this.fetchDesktop()
+        },
+        methods: {
+            onClickItem: function (e) {
+                console.log("click:" + e);
+                navigator.open({
+                    url: e.WebUrl,
+                    animated: "true"
+                });
+            },
+            fetchDesktop: function () {
+                let self = this;
+                cordova.plugin.http.enableSSLPinning(true, function () {
+                    console.log('success!');
+                }, function (e) {
+                    console.log('error :(' + e);
+                });
+                cordova.plugin.http.setDataSerializer('json')
+
+                let GET_APP_LIST = CASHIER_HOST + "GetDesktop";
+                cordova.plugin.http.post(GET_APP_LIST, {
+                    sn: '98261730055876'
+                }, {}, function (response) {
+                    // prints 200
+                    console.log(response.status);
+                    try {// prints test
+                        console.log(response.data);
+                        let json = JSON.parse(response.data);
+                        if (json.Code == 0) {
+                            self.defaultList = json.Result.Apps;
+                            console.log("apps:" + self.defaultList.length)
+                        }
+                    } catch (e) {
+                        console.error('JSON parsing error');
+                    }
+                }, function (response) {
+                    // prints 403
+                    console.log(response.status);
+
+                    //prints Permission denied
+                    console.log(response.error);
+                });
+            },
+
+            extract: function (e) {
+                let imgurl =
+                    e.IconPath == "" || e.IconPath == null
+                        ? "icon/65923b41257844f38de3f9967efb5188_135_135_.png"
+                        : e.IconPath;
+                let abs = imgurl.startsWith("http://") || imgurl.startsWith("https://");
+                let re = /\d+/g;
+                let wh = imgurl.match(re);
+                let w = wh != null ? wh.pop() : 200;
+                let h = wh != null ? wh.pop() : 200;
+                return {
+                    width: w + "px",
+                    height: h + "px",
+                    img: abs ? imgurl : APP_HOST + imgurl
+                };
+            },
+
+            transList: function (data) {
+                data.sort((a, b) => {
+                    a.DisplayIndex < b.DisplayIndex;
+                });
+
+                let ret = {top: [], body: [], bottom: []};
+                let conf = null;
+                for (let i = 0; i < data.length; ++i) {
+                    let item = data[i];
+                    let info = this.extract(item);
+                    let o = Object.assign(item, info);
+                    if (o.AppID == 8) {
+                        //skip config
+                        ret.bottom.push(o);
+                        continue;
+                    }
+
+                    if (o.DisplayIndex == 1) ret.top.push(o);
+                    else if (o.DisplayIndex > 1 && o.DisplayIndex < 5) ret.bottom.push(o);
+                    else ret.body.push(o);
+                }
+
+                //conf.WebUrl = "conf.js"
+
+                return ret;
+            }
+        },
+
         mounted() {
             let self = this;
             let router = self.$f7router;
@@ -155,7 +339,6 @@
                 router.back();
                 console.log("after: " + JSON.stringify(router.history))
                 if (ontop) {
-                    e.preventDefault();
                     if (confirm("Do you want to Exit!")) {
                         navigator.app.clearHistory();
                         navigator.app.exitApp();
@@ -165,4 +348,5 @@
             }, false);
         },
     }
+
 </script>
