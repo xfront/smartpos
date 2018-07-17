@@ -1,12 +1,14 @@
 <template>
-    <v-carousel hide-delimiters >
-        <v-carousel-item  v-for="(page, idx) in pageList" :key="idx">
-            <v-container grid-list-md>
+    <v-carousel light :cycle="false" hide-controls :hide-delimiters="pageList.length <= 1">
+        <v-carousel-item v-for="(page, i) in pageList" :key="i">
+            <v-container class="pa-1" fluid grid-list-md fill-height>
                 <v-layout row wrap>
-                    <v-flex  v-for="(e, idx2) in page"  :key="idx2" v-bind="{ [`xs${12/column}`]: true }">
-                        <v-card flat tile :style="e.style" align-center="true">
-                            <v-card-text :style="{color:e.style.color, fontSize: e.style.fontSize}">{{e.Label}}</v-card-text>
-                            <v-card-media  :style="{width: e.width, height: e.height}" :src="e.img"/>
+                    <v-flex v-for="(e,j) in page" :key="100*i+j" v-bind="{ [`xs${12/column}`]: true }">
+                        <v-card raised :style="e.style" >
+                            <img :style="{margin: 0, width: e.width, height: e.height}" :src="e.img"/>
+                            <p :style="{margin: 0, color:e.style.color, fontSize: e.style.fontSize}">
+                                {{e.Label}}
+                            </p>
                         </v-card>
                     </v-flex>
                 </v-layout>
@@ -25,7 +27,9 @@
         ],
         computed: {
             pageList: function () {
-                return this.split(this.itemList, this.row, this.column);
+                let x= this.split(this.itemList, this.row, this.column);
+                console.log("app List:" + JSON.stringify(x));
+                return x;
             }
         },
 
@@ -38,7 +42,6 @@
                     let page = list.slice(i * pageSize, (i + 1) * pageSize);
                     for (let j = 0; j < page.length; j++)
                         page[j].style = this.itemStyles[j % this.itemStyles.length];
-                    console.log("page length:"+ page.length);
                     ret.push(page);
                 }
 
