@@ -1,13 +1,51 @@
 <template>
-    <v-layout column fill-parent>
-        <v-flex>
-            <swipe-grid class="top-grid" :itemList="appList.top" :row="1" :column="1" :itemStyles="topStyles"/>
-            <swipe-grid class="body-grid" :itemList="appList.body" :row="2" :column="2" :itemStyles="bodyStyles"/>
-            <swipe-grid class="bottom-grid" :itemList="appList.bottom" :row="1" :column="3"
-                        :itemStyles="bottomStyles"/>
-        </v-flex>
-    </v-layout>
+    <div class="main-home">
+        <p class="main-title">商户名：ABC</p>
+        <swipe-grid class="top-grid" :itemList="appList.top" :row="1" :column="1" :itemStyles="topStyles"
+                    :clickfunc="onClickItem"/>
+        <swipe-grid class="body-grid" :itemList="appList.body" :row="2" :column="2" :itemStyles="bodyStyles"
+                    :clickfunc="onClickItem"/>
+        <swipe-grid class="bottom-grid" :itemList="appList.bottom" :row="1" :column="3"
+                    :itemStyles="bottomStyles" :clickfunc="onClickItem"/>
+    </div>
 </template>
+
+<style>
+    .main-home {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: stretch;
+        align-items: stretch;
+        height: 100%;
+        width: 100%;
+        margin: 0px;
+    }
+
+    .main-title {
+        text-align: center;
+        font-weight: bold;
+        margin: 0px;
+        flex: 0 1 auto !important;
+    }
+
+    .top-grid {
+        margin: 0px;
+        height: auto;
+        flex: 0 2 auto !important; /* default 0 */
+    }
+
+    .body-grid {
+        margin: 0px;
+        height: 48%;
+        flex: 1 1 auto !important; /* default 0 */
+    }
+
+    .bottom-grid {
+        margin: 0px;
+        height: auto;
+        flex: 0 2 auto !important; /* default 0 */
+    }
+</style>
 
 <script>
     import QuickMenu from '@/components/QuickMenu.vue'; // @ is an alias to /src
@@ -24,7 +62,7 @@
                         fontSize: "50px",
                         color: "white",
                         display: "flex",
-                        flexDirection: "row",
+                        flexFlow: "row nowrap",
                         justifyContent: "center",
                         alignItems: "center",
                         alignContent: "center",
@@ -34,7 +72,7 @@
                         fontSize: "50px",
                         color: "blue",
                         display: "flex",
-                        flexDirection: "row",
+                        flexFlow: "row nowrap",
                         justifyContent: "center",
                         alignItems: "stretch"
                     }
@@ -45,40 +83,36 @@
                         fontSize: "30px",
                         color: "white",
                         display: "flex",
-                        flexDirection: "column",
+                        flexFlow: "column nowrap",
                         justifyContent: "center",
                         alignItems: "center",
-                        margin: 0
                     },
                     {
                         backgroundImage: "linear-gradient(to top, #ffa001, #ffa001)",
                         fontSize: "30px",
                         color: "white",
                         display: "flex",
-                        flexDirection: "column",
+                        flexFlow: "column nowrap",
                         justifyContent: "center",
                         alignItems: "center",
-                        margin: "0"
                     },
                     {
                         backgroundImage: "linear-gradient(to top, #fd4033, #fd4033)",
                         fontSize: "30px",
                         color: "white",
                         display: "flex",
-                        flexDirection: "column",
+                        flexFlow: "column nowrap",
                         justifyContent: "flex-end",
                         alignItems: "center",
-                        margin: "0"
                     },
                     {
                         backgroundImage: "linear-gradient(to top, #5ca94a, #5ca94a)",
                         fontSize: "30px",
                         color: "white",
                         display: "flex",
-                        flexDirection: "column",
+                        flexFlow: "column nowrap",
                         justifyContent: "center",
                         alignItems: "center",
-                        margin: "0"
                     }
                 ],
                 bottomStyles: [
@@ -87,7 +121,7 @@
                         fontSize: "28px",
                         color: "white",
                         display: "flex",
-                        flexDirection: "column",
+                        flexFlow: "column nowrap",
                         justifyContent: "center",
                         alignItems: "center"
                     },
@@ -96,7 +130,7 @@
                         fontSize: "28px",
                         color: "white",
                         display: "flex",
-                        flexDirection: "column",
+                        flexFlow: "column nowrap",
                         justifyContent: "center",
                         alignItems: "center"
                     },
@@ -105,7 +139,7 @@
                         fontSize: "28px",
                         color: "white",
                         display: "flex",
-                        flexDirection: "column",
+                        flexFlow: "column nowrap",
                         justifyContent: "center",
                         alignItems: "center"
                     }
@@ -193,6 +227,11 @@
             //this.fetchDesktop()
         },
         methods: {
+            onClickItem: function (e) {
+                console.log("click:", e);
+                if (!e.IsNative)
+                    window.location = e.WebUrl;
+            },
             fetchDesktop: function () {
                 let self = this;
                 cordova.plugin.http.enableSSLPinning(true, function () {
@@ -263,7 +302,10 @@
 
                     if (o.DisplayIndex == 1) ret.top.push(o);
                     else if (o.DisplayIndex > 1 && o.DisplayIndex < 5) ret.bottom.push(o);
-                    else ret.body.push(o);
+                    else {
+                        ret.body.push(o);
+                        //ret.body.push(o);
+                    }
                 }
 
                 //conf.WebUrl = "conf.js"
@@ -273,21 +315,3 @@
         }
     }
 </script>
-
-<style>
-    .top-grid {
-        height: auto;
-        flex: 3 0 auto; /* default 0 */
-    }
-
-    .body-grid {
-        min-height: 250px;
-        height: auto;
-        flex: 5 2 auto; /* default 0 */
-    }
-
-    .bottom-grid {
-        height: auto;
-        flex: 2 0 auto; /* default 0 */
-    }
-</style>
