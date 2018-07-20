@@ -53,7 +53,7 @@
 
     .body-grid {
         width: 100%;
-        max-height: 80%;
+        max-height: 100%;
         flex: 10 3 auto; /* default 0 */
     }
 
@@ -238,7 +238,7 @@
                     "DisplayIndex": 6,
                     "LevelIndex": 1
                 }];
-            }, 3000);
+            }, 5000);
             //this.fetchDesktop()
         },
         methods: {
@@ -317,9 +317,16 @@
                         continue;
                     }
 
-                    if (o.DisplayIndex == 1) ret.top.push(o);
-                    else if (o.DisplayIndex > 1 && o.DisplayIndex < 5) ret.bottom.push(o);
-                    else ret.body.push(o);
+                    if (o.DisplayIndex == 1){
+                        ret.top.push(o);
+                    }
+                    else if (o.DisplayIndex > 1 && o.DisplayIndex < 5) {
+                        ret.bottom.push(o);
+                    }
+                    else{
+                        ret.body.push(o);
+                        ret.body.push(o);
+                    }
                 }
 
                 //conf.WebUrl = "conf.js"
@@ -342,7 +349,10 @@
                     if (confirm("Do you want to Exit!")) {
                         navigator.app.clearHistory();
                         navigator.app.exitApp();
+                    } else{
+                        e.stopPropagation();
                     }
+
                 }
 
             }, false);
