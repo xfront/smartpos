@@ -81,7 +81,9 @@
 
         computed: {
             pageList: function () {
-                return this.split(this.itemList, this.row, this.column);
+                let x= this.split(this.itemList, this.row, this.column);
+                console.log("app List:" + JSON.stringify(x));
+                return x;
             }
         },
 
@@ -91,20 +93,8 @@
                 let pageSize = r * c;
 
                 for (let i = 0; i < Math.ceil(list.length / pageSize); ++i) {
-                    let t = [];
                     let page = list.slice(i * pageSize, (i + 1) * pageSize);
-                    let idx = 0,
-                        rows = Math.ceil(page.length / c);
-                    for (let j = 0; j < rows; j++) {
-                        let row = page.slice(j * c, (j + 1) * c);
-                        for (let k = 0; k < row.length; k++) {
-                            row[k].style = this.itemStyles[idx++ % this.itemStyles.length];
-                        }
-                        t.push(row);
-                        console.log('row:', row)
-                    }
-                    ret.push(t);
-                    console.log('page:', t)
+                    ret.push(page);
                 }
                 console.log("all:", ret);
                 return ret;
